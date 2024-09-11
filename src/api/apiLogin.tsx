@@ -10,12 +10,12 @@ interface LoginData {
 }
 
 interface LoginResponse {
-    accessToken: string;
+    token: string;
 }
 
 export const loginRequest = async (loginData: LoginData): Promise<LoginResponse> => {
 
-    const response = await fetch(apiUrl + 'autentica/login', {
+    const response = await fetch(apiUrl + 'auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -42,10 +42,9 @@ interface profileResponse {
 export const profileRequest = async (): Promise<profileResponse> => {
 
     const token = useAuthStore.getState().token;
-
     try {
 
-        const response = await axios.post(apiUrl + 'autentica/profile', {}, {
+        const response = await axios.post(apiUrl + 'profile/userinfo', {}, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,

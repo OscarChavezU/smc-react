@@ -13,16 +13,11 @@ import DialogUpdGastos from "./DialogUpdGastos";
 import DialogDelGastos from "./DialogDelGastos";
 import { formatNumber } from "@/funciones/funciones";
 
-
-
 interface Props {
     titulo: string,
     idproducto: any,
     data?: any[]
 }
-
-
-
 
 function TablaGastos({ titulo, data, idproducto }: Props) {
 

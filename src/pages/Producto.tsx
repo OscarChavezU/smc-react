@@ -57,6 +57,7 @@ function Producto() {
     const totalGastos = dataGastos?.listaGastos?.reduce((acc, gasto) => acc + gasto.monto, 0);
     const totalGastosRounded = totalGastos.toFixed(2);
     const sumatotal = (totalGastos + dataGastos?.producto.costo).toFixed(2);
+    console.log(dataGastos);
 
     return (
         <>

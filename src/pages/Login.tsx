@@ -45,7 +45,7 @@ function Login() {
             { username, password },
             {
                 onSuccess: (data) => {
-                    setToken(data.accessToken)
+                    setToken(data.token)
                     setMessage("");
                     profileMutation.mutate();
                     // Manejar el éxito, como redireccionar al usuario o guardar el token

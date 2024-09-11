@@ -290,7 +290,7 @@ function Productos() {
                                 <CardContent className="p-6 text-sm">
                                     <div className="grid gap-3 h-52 mb-8">
                                         <img
-                                            src={producto.foto}
+                                            src={producto.urlimagen}
                                             className="mx-auto h-52"
                                             alt="Descripción de la imagen"
                                             loading="lazy"

@@ -16,7 +16,7 @@ function Repuesto() {
     const { idrepuesto } = useParams();
 
     // Convertir idproducto a número
-    const idRepuestoNumber = Number(idrepuesto);
+    const idRepuestoNumber = Number(idrepuesto); 
 
     // Verificar si la conversión fue exitosa
     if (isNaN(idRepuestoNumber)) return "Id debe ser número"

@@ -17,6 +17,7 @@ export const productosRequest = async (): Promise<productosResponse> => {
         }
     });
 
+
     if (!response.ok) {
         throw new Error('Error al obtener la data');
     }
@@ -44,7 +45,7 @@ interface gastosResponse {
 export const CostosxProducto = async (idproducto: number): Promise<gastosResponse> => {
     const token = useAuthStore.getState().token;
 
-    const response = await fetch(apiUrl + `productos/getCostos/${idproducto}`, {
+    const response = await fetch(apiUrl + `gastos/getCostos/${idproducto}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -72,13 +73,20 @@ interface gasto {
 
 export const updateGasto = async (gasto: gasto) => {
     const token = useAuthStore.getState().token;
-    const response = await fetch(apiUrl + `productos/updGasto`, {
+    const response = await fetch(apiUrl + `gastos/updGasto`, {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify(gasto)
+        body: new URLSearchParams({
+            idgasto: gasto.idgasto?.toString() || '',
+            fecharegistro: gasto.fecharegistro,
+            nombre: gasto.nombre,
+            descripcion: gasto.descripcion,
+            monto: gasto.monto.toString(),
+            observaciones: gasto.observaciones
+        })
     });
 
     if (!response.ok) {
@@ -91,13 +99,21 @@ export const updateGasto = async (gasto: gasto) => {
 
 export const insertGasto = async (gasto: gasto) => {
     const token = useAuthStore.getState().token;
-    const response = await fetch(apiUrl + `productos/insGasto`, {
+    const response = await fetch(apiUrl + `gastos/insGasto`, {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify(gasto)
+        body: new URLSearchParams({
+            fecharegistro: gasto.fecharegistro,
+            nombre: gasto.nombre,
+            descripcion: gasto.descripcion,
+            monto: gasto.monto.toString(),
+            tipogasto: gasto.tipogasto || '',
+            observaciones: gasto.observaciones,
+            idproducto: gasto.idproducto?.toString() || ''
+        })
     });
 
     if (!response.ok) {
@@ -110,13 +126,15 @@ export const insertGasto = async (gasto: gasto) => {
 
 export const anularGasto = async (idgasto: number) => {
     const token = useAuthStore.getState().token;
-    const response = await fetch(apiUrl + `productos/anularGasto`, {
+    const response = await fetch(apiUrl + `gastos/anularGasto`, {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ "idgasto": idgasto })
+        body: new URLSearchParams({
+            idgasto: idgasto.toString()
+        })
     });
 
     if (!response.ok) {
@@ -137,7 +155,7 @@ interface nota {
 
 export const insertNota = async (nota: nota) => {
     const token = useAuthStore.getState().token;
-    const response = await fetch(apiUrl + `productos/insNota`, {
+    const response = await fetch(apiUrl + `notas/insNota`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -156,13 +174,16 @@ export const insertNota = async (nota: nota) => {
 
 export const actualizarNota = async (nota: nota) => {
     const token = useAuthStore.getState().token;
-    const response = await fetch(apiUrl + `productos/updNota`, {
+    const response = await fetch(apiUrl + `notas/updNota`, {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify(nota)
+        body: new URLSearchParams({
+            idnota: nota.idnota?.toString() || '',  // Asegura que sea un string
+            estado: nota.estado || ''  
+        })
     });
 
     if (!response.ok) {
@@ -215,9 +236,9 @@ export const insertProducto = async (producto: Producto) => {
         formData.append("foto", producto.foto);
     }
 
-    console.log(formData)
+    
 
-    const response = await fetch(apiUrl + `productosInsUpd/ins`, {
+    const response = await fetch(apiUrl + `productos/ins`, {
         method: "POST",
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -235,34 +256,32 @@ export const insertProducto = async (producto: Producto) => {
 export const updProducto = async (producto: Producto) => {
     const token = useAuthStore.getState().token;
 
-    const formData = new FormData();
-    formData.append("idproducto", producto.idproducto);
-    formData.append("nombre", producto.nombre);
-    formData.append("pais", producto.pais);
-    formData.append("proveedor", producto.proveedor);
-    formData.append("fechaingreso", producto.fechaingreso);
-    formData.append("origen", producto.origen);
-    formData.append("anio", producto.anio);
-    formData.append("codigo", producto.codigo);
-    formData.append("modelo", producto.modelo);
-    formData.append("marca", producto.marca);
-    formData.append("estado", producto.estado);
-    formData.append("costo", producto.costo);
-    formData.append("precioventa", producto.precioventa);
-    formData.append("quiereFoto", producto.quiereFoto);
+    const formData2 = new FormData();
+    formData2.append("idproducto", producto.idproducto.toString());
+    formData2.append("nombre", producto.nombre);
+    formData2.append("pais", producto.pais);
+    formData2.append("proveedor", producto.proveedor);
+    formData2.append("fechaingreso", producto.fechaingreso);
+    formData2.append("origen", producto.origen);
+    formData2.append("anio", producto.anio);
+    formData2.append("codigo", producto.codigo);
+    formData2.append("modelo", producto.modelo);
+    formData2.append("marca", producto.marca);
+    formData2.append("estado", producto.estado);
+    formData2.append("costo", producto.costo.toString());
+    formData2.append("precioventa", producto.precioventa.toString());
+    formData2.append("quiereFoto", producto.quiereFoto);
 
     if (producto.foto) {
-        formData.append("foto", producto.foto);
+        formData2.append("foto", producto.foto);
     }
 
-
-    const response = await fetch(apiUrl + `productosInsUpd/upd`, {
+    const response = await fetch(apiUrl + `productos/actualizar`, {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         },
-        body: formData
+        body: formData2
     });
 
     if (!response.ok) {
