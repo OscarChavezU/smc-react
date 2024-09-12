@@ -33,6 +33,8 @@ function Login() {
         mutationFn: profileRequest
     })
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
 
     const setToken = useAuthStore(state => state.setToken)
     const setProfile = useAuthStore(state => state.setProfile)
@@ -87,6 +89,7 @@ function Login() {
                             <Label htmlFor="password">Contraseña</Label>
                             <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                         </div>
+                        <h1><Input id="textourl" type="text" value={apiUrl}  /> </h1>
                     </CardContent>
                     <CardFooter>
                         <Button className="w-full">
