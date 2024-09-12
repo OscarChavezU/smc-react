@@ -1,6 +1,7 @@
 {
   "name": "smc-react",
   "version": "0.0.0",
+  "homepage": ".",
   "type": "module",
   "scripts": {
     "dev": "vite",

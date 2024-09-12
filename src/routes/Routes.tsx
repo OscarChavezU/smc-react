@@ -31,8 +31,6 @@ const pruebaList = ['Prueba Item 1', 'Prueba Item 2', 'Prueba Item 3'];
 
 function Routes() {
 
-
-
   const router = createBrowserRouter([
     {
       path: "/",
