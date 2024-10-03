@@ -123,7 +123,7 @@ function UpdInsProducto({ Producto, Marcas, funcion, children }: Props) {
             <DialogTrigger asChild>
                 {children}
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]" onInteractOutside={(e) => e.preventDefault()}>
+            <DialogContent className="sm:max-w-[525px] overflow-y-scroll max-h-screen" onInteractOutside={(e) => e.preventDefault()}>
                 <form onSubmit={handleSubmit}>
                     <DialogHeader>
                         <DialogTitle>Editar/Registrar Producto</DialogTitle>
@@ -314,6 +314,7 @@ function UpdInsProducto({ Producto, Marcas, funcion, children }: Props) {
                                     <SelectItem value="2">Exposición</SelectItem>
                                     <SelectItem value="3">Vendido</SelectItem>
                                     <SelectItem value="4">Exportación</SelectItem>
+                                    <SelectItem value="0">Anulado</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>

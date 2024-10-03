@@ -274,12 +274,12 @@ function Productos() {
                                                     </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="end">
 
-                                                        <UpdInsProducto Producto={producto} Marcas={productosData?.listaMarcas} funcion={"productos"}>
+                                                        {/* <UpdInsProducto Producto={producto} Marcas={productosData?.listaMarcas} funcion={"productos"}>
                                                             <DropdownMenuItem >Editar</DropdownMenuItem>
                                                         </UpdInsProducto>
 
                                                         <DropdownMenuSeparator />
-                                                        <DropdownMenuItem>Anular</DropdownMenuItem>
+                                                        <DropdownMenuItem>Anular</DropdownMenuItem> */}
                                                     </DropdownMenuContent>
                                                 </DropdownMenu></>
                                             )
