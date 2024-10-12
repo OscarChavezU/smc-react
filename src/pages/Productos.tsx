@@ -142,85 +142,97 @@ function Productos() {
 
         <>
 
-            <div className="grid grid-cols-3 gap-4 p-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-8">
 
-                <Select
-                    name="filtropais"
-                    value={filtroPais}
-                    onValueChange={(value) => value !== " " ? setFiltroPais(value) : setFiltroPais("")}
-                >
-                    <SelectTrigger className="">
-                        <SelectValue placeholder="Selecciona un país" />
-                    </SelectTrigger>
+                <div>
+                    <Select
+                        name="filtropais"
+                        value={filtroPais}
+                        onValueChange={(value) => value !== " " ? setFiltroPais(value) : setFiltroPais("")}
+                    >
+                        <SelectTrigger className="">
+                            <SelectValue placeholder="Selecciona un país" />
+                        </SelectTrigger>
 
-                    <SelectContent>
-                        <SelectItem value=" ">Todos</SelectItem>
-                        <SelectItem value="USA">USA</SelectItem>
-                        <SelectItem value="Peru">PERU</SelectItem>
-                    </SelectContent>
+                        <SelectContent>
+                            <SelectItem value=" ">Todos</SelectItem>
+                            <SelectItem value="USA">USA</SelectItem>
+                            <SelectItem value="Peru">PERU</SelectItem>
+                        </SelectContent>
 
-                </Select>
+                    </Select>
+                </div>
 
-                <Select
-                    name="filtroestado"
-                    value={filtroEstado}
-                    onValueChange={(value) => value !== " " ? setFiltroEstado(value) : setFiltroEstado("")}
-                >
-                    <SelectTrigger className="">
-                        <SelectValue placeholder="Selecciona un estado" />
-                    </SelectTrigger>
+                <div>
+                    <Select
+                        name="filtroestado"
+                        value={filtroEstado}
+                        onValueChange={(value) => value !== " " ? setFiltroEstado(value) : setFiltroEstado("")}
+                    >
+                        <SelectTrigger className="">
+                            <SelectValue placeholder="Selecciona un estado" />
+                        </SelectTrigger>
 
-                    <SelectContent>
-                        <SelectItem value=" ">Todos</SelectItem>
-                        <SelectItem value="Mantenimiento">Mantenimiento</SelectItem>
-                        <SelectItem value="Exposicion">Exposicion</SelectItem>
-                        <SelectItem value="Vendido">Vendido</SelectItem>
-                        <SelectItem value="Exportacion">Exportacion</SelectItem>
-                    </SelectContent>
+                        <SelectContent>
+                            <SelectItem value=" ">Todos</SelectItem>
+                            <SelectItem value="Mantenimiento">Mantenimiento</SelectItem>
+                            <SelectItem value="Exposicion">Exposicion</SelectItem>
+                            <SelectItem value="Vendido">Vendido</SelectItem>
+                            <SelectItem value="Exportacion">Exportacion</SelectItem>
+                        </SelectContent>
 
-                    {/* Opciones del estado */}
-                </Select>
+                        {/* Opciones del estado */}
+                    </Select>
+                </div >
+                <div>
+                    <Input
+                        type="text"
+                        id="filtrocodigo"
+                        value={filtroCodigo}
+                        onChange={(e) => setFiltroCodigo(e.target.value)}
+                        placeholder="Filtra por codigo"
+                        className="mr-2"
+                    />
+                </div>
+                <div>
+                    <Select
+                        name="filtromarca"
+                        value={filtroMarca}
+                        onValueChange={(value) => value !== " " ? setFiltroMarca(value) : setFiltroMarca("")}
+                    >
+                        <SelectTrigger className="">
+                            <SelectValue placeholder="Selecciona un marca" />
+                        </SelectTrigger>
 
-                <Input
-                    type="text"
-                    id="filtrocodigo"
-                    value={filtroCodigo}
-                    onChange={(e) => setFiltroCodigo(e.target.value)}
-                    placeholder="Filtra por codigo"
-                    className="mr-2"
-                />
+                        <SelectContent>
+                            <SelectItem value=" ">Todas</SelectItem>
+                            {productosData?.listaMarcas.map((producto: any) => (
+                                <>
+                                    <SelectItem key={producto.marca} value={producto.marca}>{producto.marca}</SelectItem>
+                                </>
+                            ))}
+                        </SelectContent>
 
-                <Select
-                    name="filtromarca"
-                    value={filtroMarca}
-                    onValueChange={(value) => value !== " " ? setFiltroMarca(value) : setFiltroMarca("")}
-                >
-                    <SelectTrigger className="">
-                        <SelectValue placeholder="Selecciona un marca" />
-                    </SelectTrigger>
+                    </Select>
+                </div>
 
-                    <SelectContent>
-                        <SelectItem value=" ">Todas</SelectItem>
-                        {productosData?.listaMarcas.map((producto: any) => (
-                            <SelectItem value={producto.marcalower}>{producto.marca}</SelectItem>
-                        ))}
-                    </SelectContent>
+                <div>
+                    <Input
+                        type="text"
+                        id="filtrotexto"
+                        value={filtroTexto}
+                        onChange={(e) => setFiltroTexto(e.target.value)}
+                        placeholder="Filtra por texto"
+                        className="mr-2"
+                    />
+                </div>
+                <div>
+                    <button onClick={resetFilters} className="btn btn-primary">
+                        Resetear Filtros
+                    </button>
+                </div>
 
-                </Select>
-
-                <Input
-                    type="text"
-                    id="filtrotexto"
-                    value={filtroTexto}
-                    onChange={(e) => setFiltroTexto(e.target.value)}
-                    placeholder="Filtra por texto"
-                    className="mr-2"
-                />
-                <button onClick={resetFilters} className="btn btn-primary">
-                    Resetear Filtros
-                </button>
-
-
+                            <div>
                 {
                     areaacceso === "admin" ? (
                         <><div className="col-span-3 m-auto">
@@ -235,7 +247,9 @@ function Productos() {
                     )
                 }
 
-            </div>
+</div>
+
+            </div >
 
             <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
                 {

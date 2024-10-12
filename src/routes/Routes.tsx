@@ -6,6 +6,7 @@ import { ProtectedRoute } from "@/pages/ProtectedRoutes";
 import {
   createBrowserRouter,
   RouterProvider,
+  createHashRouter
 } from "react-router-dom";
 import Productos from "@/pages/Productos";
 import { Home, LineChart, Package, ShoppingCart } from "lucide-react";
@@ -31,7 +32,7 @@ const pruebaList = ['Prueba Item 1', 'Prueba Item 2', 'Prueba Item 3'];
 
 function Routes() {
 
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/",
       element: <Login />,

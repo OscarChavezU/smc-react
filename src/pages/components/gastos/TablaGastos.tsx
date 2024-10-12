@@ -77,10 +77,10 @@ function TablaGastos({ titulo, data, idproducto }: Props) {
                             ))}
 
                             <TableRow>
+                                <TableCell colSpan={2}> <b>Total {titulo}</b></TableCell>
+                                
                                 <TableCell></TableCell>
-                                <TableCell></TableCell>
-                                <TableCell></TableCell>
-                                <TableCell className="text-right">{formatNumber(totalGastos)}</TableCell>
+                                <TableCell className="text-right"><b>{formatNumber(totalGastos)}</b></TableCell>
                                 <TableCell></TableCell>
                                 <TableCell></TableCell>
                                 <TableCell></TableCell>
